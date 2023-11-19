@@ -110,9 +110,13 @@
 
         public function removeCollabs($nom)
         {
-            if (($key = array_search($nom, $this->collabs)) !== false) {
-                unset($this->collabs[$key]);
+            foreach($this->collabs as $collab){
+                if($collab['nom'] === $nom){
+                    unset($collab);
+                }
             }
+
+            return $this;
         }
 
 
@@ -124,4 +128,5 @@
     echo $esn->getSalaire().PHP_EOL;
     echo $esn->getNbDev();
     $esn->removeCollabs('Lita');
+    var_dump($esn->getCollabs());
     echo $esn->getNbDev();
