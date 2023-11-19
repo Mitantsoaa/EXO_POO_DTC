@@ -100,8 +100,8 @@
         public function addCollabs($nom,$profil)
         {
             $col = [];
-            $col['nom'] = $this->setNom($nom);
-            $col['profil'] = $this->setProfil($profil);
+            $col['nom'] = json_encode($this->setNom($nom));
+            $col['profil'] = json_encode($this->setProfil($profil));
             $col['salaire'] = $this->calculeSalaire($this->profil);
             array_push($this->collabs, $col );
 
