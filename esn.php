@@ -100,19 +100,23 @@
         public function addCollabs($nom,$profil)
         {
             $col = [];
-            $col['nom'] = $this->setNom($nom);
-            $col['profil'] = $this->setProfil($profil);
+            $col['nom'] = json_encode($this->setNom($nom));
+            $col['profil'] = json_encode($this->setProfil($profil));
             $col['salaire'] = $this->calculeSalaire($this->profil);
-            array_push($this->collabs, $col );
+            array_push($this->collabs, $this->setProfil($profil) );
 
             return $this;
         }
 
         public function removeCollabs($nom)
         {
-            if (($key = array_search($nom, $this->collabs)) !== false) {
-                unset($this->collabs[$key]);
+            for($i=0; $i<=count($this->collabs); $i++){
+                if($this->collabs[$i]->nom === $nom){
+                    unset($this->collabs[$i]);
+                }
             }
+
+            return $this;
         }
 
 
@@ -123,5 +127,6 @@
     $esn->addCollabs('Lita','J');
     echo $esn->getSalaire().PHP_EOL;
     echo $esn->getNbDev();
-    $esn->removeCollabs('Lita');
+    $esn->removeCollabs('Koto');
+    // var_dump($esn->getCollabs());
     echo $esn->getNbDev();
