@@ -6,7 +6,7 @@
         public string $nom;
         public int $nbDev;
         public string $contact;
-        public array $collabs;
+        public array $collabs = [];
 
         public function getProfil()
         {
@@ -48,7 +48,7 @@
 
         public function getNbDev()
         {
-            return $this->nbDev;
+            return count($this->collabs);
         }
 
         public function setNbDev(?int $nb)
@@ -82,8 +82,46 @@
                 $this->setSalaire('200k');
             }
 
-            return $this->salaire('100k');
+            $this->salaire = '100k';
+        }
+
+        public function getCollabs()
+        {
+            return $this->collabs;
+        }
+
+        public function setCollabs($collabs)
+        {
+            $this->collabs = $collabs;
+
+            return $this;
+        }
+
+        public function addCollabs($nom,$profil)
+        {
+            $col = [];
+            $col['nom'] = $this->setNom($nom);
+            $col['profil'] = $this->setProfil($profil);
+            $col['salaire'] = $this->calculeSalaire($this->profil);
+            array_push($this->collabs, $col );
+
+            return $this;
+        }
+
+        public function removeCollabs($nom)
+        {
+            if (($key = array_search($nom, $this->collabs)) !== false) {
+                unset($this->collabs[$key]);
+            }
         }
 
 
     }
+
+    $esn = new Esn();
+    $esn->addCollabs('Koto','S');
+    $esn->addCollabs('Lita','J');
+    echo $esn->getSalaire().PHP_EOL;
+    echo $esn->getNbDev();
+    $esn->removeCollabs('Lita');
+    echo $esn->getNbDev();
