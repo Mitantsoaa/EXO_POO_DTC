@@ -1,5 +1,5 @@
 <?php 
-require_once 'collab.php';
+require'autoload.php';
 
     class Esn
     {
@@ -51,17 +51,15 @@ require_once 'collab.php';
 
         public function addCollabs(collab $collab)
         {
-            array_push($this->collabs, $collab);
+            $this->collabs[] =  $collab;
 
             return $this;
         }
 
         public function removeCollabs(collab $collab)
         {
-            $index = array_search($collab, $this->collabs);
-
-            if ($index !== false) {
-                unset($this->collabs[$index]);
+            if (in_array($collab,$this->collabs)) {
+                unset($this->collabs);
             }
 
         }
