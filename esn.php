@@ -49,50 +49,23 @@ require_once 'collab.php';
             return $this;
         }
 
-        public function getCollabs()
+        public function addCollabs(collab $collab)
         {
-            return $this->collabs;
-        }
-
-        public function setCollabs($collabs)
-        {
-            $this->collabs = $collabs;
+            array_push($this->collabs, $collab);
 
             return $this;
         }
 
-        public function addCollabs($nom,$profil)
+        public function removeCollabs(collab $collab)
         {
-            $col = [];
-            $col['nom'] = json_encode($this->setNom($nom));
-            $col['profil'] = json_encode($this->setProfil($profil));
-            $col['salaire'] = $this->calculeSalaire($this->profil);
-            array_push($this->collabs, $this->setProfil($profil) );
+            $index = array_search($collab, $this->collabs);
 
-            return $this;
-        }
-
-        public function removeCollabs($nom)
-        {
-            for($i=0; $i<=count($this->collabs); $i++){
-                if($this->collabs[$i]->nom === $nom){
-                    unset($this->collabs[$i]);
-                }
+            if ($index !== false) {
+                unset($this->collabs[$index]);
             }
 
-            return $this;
         }
 
 
     }
 
-    
-
-    $esn = new Esn();
-    $esn->addCollabs('Koto','S');
-    $esn->addCollabs('Lita','J');
-    echo $esn->getSalaire().PHP_EOL;
-    echo $esn->getNbDev();
-    $esn->removeCollabs('Koto');
-    // var_dump($esn->getCollabs());
-    echo $esn->getNbDev();
