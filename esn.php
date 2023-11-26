@@ -1,7 +1,7 @@
 <?php 
 require'autoload.php';
 
-    class Esn
+    class Esn implements Exercice
     {
         public string $nom;
         public int $nbDev;
