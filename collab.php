@@ -1,5 +1,7 @@
 <?php
-class Collab
+require 'autoload.php';
+
+class Collab implements Exercice
     {
         public string $profil;
         protected string $salaire;
@@ -31,7 +33,7 @@ class Collab
 
             return $this;
         }
-        
+
         public function getNom()
         {
             return $this->nom;
